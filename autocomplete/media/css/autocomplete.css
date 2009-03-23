@@ -1,0 +1,19 @@
+.autocompleter_list {
+    border: 1px solid red;
+    position: absolute;
+    display: none;
+    cursor: pointer;
+}
+.autocompleter_list div.selected {
+    background: red !important;
+}
+.autocompleter_list div.hover {
+    background: blue;
+}
+.autocompleter_loading {
+    padding-left: 16px;
+    line-height: 16px;
+    display: inline;
+    background: url(../img/loading.gif);
+    visibility: hidden;
+}
