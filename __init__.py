@@ -6,3 +6,4 @@ from tablefield import JSONWidget, JSONField, TableField
 from registration import *
 from removable_filefield import RemovableFileFormField
 from videofield import VideoField
+from phonefield import PhoneField, DBPhoneField

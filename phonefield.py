@@ -12,11 +12,16 @@ __all__ = (
 clean_reg = re.compile('[^\d\+]*')
 
 class PhoneField(forms.RegexField):
+    u'''
+        Form field checking that phone is full (starts with "+") and normalizes
+            it to only plus symbol and digits
+    '''
     regex = re.compile('^\+[\d ]+\(?\d*\)?[\d -]+$')
     
     default_error_messages = {
         'required': _(u'This field is required.'),
-        'invalid': _(u'Введите телефон с кодом страны и города (или мобильного оператора) в формате +7 (495) ххх-хх-хх или +7495ххххххх'),
+        'invalid': _(u'Введите телефон с кодом страны и города (или мобильного '
+                    u'оператора) в формате +7 (495) ххх-хх-хх или +7495ххххххх'),
     }
     
     def __init__(self, *args, **kwargs):
@@ -30,6 +35,11 @@ class PhoneField(forms.RegexField):
         return clean_reg.subn('', phone)[0]
 
 class DBPhoneField(models.CharField):
+    '''
+        Form field using PhoneField as formfield and normalizing phone value
+            in the same way
+    '''
+    
     description = _("String (up to %(max_length)s)")
 
     def __init__(self, *args, **kwargs):
