@@ -52,8 +52,8 @@ class VideoField(forms.URLField):
         super(VideoField, self).__init__(*args, **kwargs)
     
     def clean(self, url):
-        c = super(VideoField, self).clean(url)
-        v = VIDEO_REG.match(url)
+        self.url = super(VideoField, self).clean(url)
+        v = VIDEO_REG.match(self.url)
         if v is not None: 
             site, url = v.groups()
             if site in VIDEO:
@@ -83,4 +83,4 @@ class VideoTwoInOneField(VideoField):
     def clean(self, url):
         c = super(VideoTwoInOneField, self).clean(url)
         if c:
-            return u'<!--' + url +'-->' + c
+            return u'<!--' + self.url +'-->' + c
