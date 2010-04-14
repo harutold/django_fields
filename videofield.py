@@ -53,6 +53,8 @@ class VideoField(forms.URLField):
     
     def clean(self, url):
         self.url = super(VideoField, self).clean(url)
+	if not url:
+            return url
         v = VIDEO_REG.match(self.url)
         if v is not None: 
             site, url = v.groups()
